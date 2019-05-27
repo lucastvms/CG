@@ -14,3 +14,11 @@
     "selector": ["source.c++"],
     "shell": true
 }
+
+
+/*Credits:
+http://www.drudoo.com/blog/files/9a1b0108dd5fafe1f54660cf9ca4ff28-14.php
+
+Linux:
+http://blog.minhazulhaque.com/sublime-text-as-opengl-glu-glut-ide/
+*/
