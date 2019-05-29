@@ -3,8 +3,7 @@
 
 using namespace std;
 
-GLsizei winWidth = 600, winHeight = 400
-;
+GLsizei winWidth = 600, winHeight = 400;
 void init(void)
 {
 	glClearColor(0.0, .5, 1.0, 1.0); // Cor da Janela em azul (R, G, B , alpha) de 0 à 1
