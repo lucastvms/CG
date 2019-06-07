@@ -1,0 +1,24 @@
+//First open Sublime Text and go to Tools -> Build System -> New Build System…   clear all and insert:
+//MAC USERS
+
+{ "cmd": [ "g++ \"$file\" -o \"$file_base_name\" -framework GLUT -framework OpenGL -framework Cocoa && ./\"$file_base_name\""], "working_dir": "${project_path:${folder}}", "selector": ["source.c++"], "shell": true }
+
+//Save file as OpenGL.sublime-build and select OpenGL for use it.
+
+
+//LINUX USERS
+
+{
+    "cmd": [ "g++ \"$file\" -o \"$file_base_name\" -lGLU -lGL -lglut && ./\"$file_base_name\""],
+    "working_dir": "${project_path:${folder}}",
+    "selector": ["source.c++"],
+    "shell": true
+}
+
+
+/*Credits:
+http://www.drudoo.com/blog/files/9a1b0108dd5fafe1f54660cf9ca4ff28-14.php
+
+Linux:
+http://blog.minhazulhaque.com/sublime-text-as-opengl-glu-glut-ide/
+*/
