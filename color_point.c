@@ -10,7 +10,7 @@ void init(void)
 
 	glMatrixMode(GL_PROJECTION); // Projeção 2D
 
-	glOrtho(0.0, 200.0, 0.0, 150.0, -1.0, -1.0); //Definindo os limites da Projeção
+	glOrtho(0.0, 200.0, 0.0, 150.0, -1.0, -1.0); // Definindo os limites da Projeção
 }
 
 void displayFcn()
