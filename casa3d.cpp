@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
 
 /*
  * Adaptado de:
@@ -240,9 +241,11 @@ float fraction = 0.5f;
     switch (key) {
         // funções que indicam a mudança de ângulo de visão e não dá um passo ao lado
         case GLUT_KEY_LEFT :
+        printf("%f", lx);
             angle -= 0.05f;
             lx = sin(angle);
             lz = -cos(angle);
+            printf("%f", lx);
         break;
         case GLUT_KEY_RIGHT :
             angle += 0.05f;
