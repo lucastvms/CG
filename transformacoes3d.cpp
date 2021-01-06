@@ -1,0 +1,115 @@
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 640
+
+float RED[] = {1.0, 0.0, 0.0};
+float GREEN[] = {0.0, 1.0, 0.0};
+float BLUE[] = {0.0, 0.0, 1.0};
+float YELLOW[] = {0.8, 0.8, 0.0};
+float WHITE[] = {1.0, 1.0, 1.0};
+float GRAY[] = {6.0, 6.0, 6.0};
+
+
+float day = 0, year = 0, month = 0;
+
+void setColor(float *color){
+	glColor3f(color[0], color[1], color[2]);
+}
+
+void update() {
+	year = (float)((int)(year + 1) % 360);
+	day = (float)((int) (day + 15) % 360);
+	month = (float)((int) (month + 12) % 360);
+}
+
+void display() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	setColor(YELLOW);
+
+	// sol
+	glPushMatrix();
+		glRotatef((GLfloat) year/2, 0.0, 0.0, -1.0);
+		glutWireSphere(0.6, 20, 10);
+	glPopMatrix();
+
+	// planeta 1
+	setColor(RED);
+	glPushMatrix();
+		glRotatef((GLfloat) year * 2, 0.0, 0.0, -1.0);
+		glTranslatef(2.0, 0.0, 0.0);
+		glRotatef((GLfloat) day, 0.0, 0.0, 1.0);
+		glutWireSphere(0.35, 20, 10);
+	glPopMatrix();
+
+	//planeta 2
+	setColor(BLUE);
+	glPushMatrix();
+	glRotatef((GLfloat) year, 0.0, 0.0, 1.0);
+	glTranslatef(-4.0, 0.0, 0.0);
+	glRotatef((GLfloat) day, 0.0, 0.0, 1.0);
+	glutWireSphere(0.4, 20, 10);
+
+	//lua 1
+	setColor(GRAY);
+	glPushMatrix();
+		glRotatef((GLfloat) month, -1.0, 0.0, 0.0);
+		glTranslatef(-0.7, 0.0, 0.0);
+		glutWireSphere(0.2, 10, 5);
+	glPopMatrix();
+
+	// lua 2
+	setColor(GREEN);
+	glPushMatrix();
+		glRotatef((GLfloat) month, -1.0, -1.0, 0.0);
+		glTranslatef(0.7, 0.7, 0.0);
+		glutWireSphere(0.2, 10, 5);
+	glPopMatrix();
+	glPopMatrix();
+
+	glutSwapBuffers();
+}
+
+void keyboard(unsigned char key, int x , int y) {
+	switch (key) {
+		case 'y':
+			update();
+			break;
+			
+		case 'q':
+			exit(0);
+		default:
+			break;
+	}
+	glutPostRedisplay();
+}
+
+void reshape(int w, int h) {
+	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	gluPerspective(60.0f, (GLfloat) w/ (GLfloat) h, 1.0, 20.0);
+	gluLookAt(0.0, 0.0, 7.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+}
+
+
+int main(int argc, char **argv) {
+	// inicialização
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	glutCreateWindow("Transformações 3D");
+
+	glutDisplayFunc(display);
+	glutKeyboardFunc(keyboard);
+	glutReshapeFunc(reshape);
+
+	glutMainLoop();
+
+	return 0;
+}
